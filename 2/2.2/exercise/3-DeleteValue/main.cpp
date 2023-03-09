@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 //顺序表插入与排序
 #define MaxSize 50
 typedef int ElemType;
@@ -11,8 +10,8 @@ typedef struct {
 
 bool ListInsert(SqList &L, int pos, ElemType element);
 void PrintList(SqList l);
-void ReverseSqList(SqList &l);
 
+void DeleteByValue(SqList &l, int value);
 int main() {
     SqList L;
     L.data[0] = 1;
@@ -20,22 +19,26 @@ int main() {
     L.data[2] = 3;
     L.length = 3;
     bool ret = ListInsert(L, 3, 60);
+    ListInsert(L, 3, 60);
     if (ret) {
         printf("insert sqlist success\n");
         PrintList(L);
     } else {
         printf("insert sqlist fail\n");
     }
-    ReverseSqList(L);
+    int value = 60;
+    DeleteByValue(L, value);
     PrintList(L);
     return 0;
 }
-void ReverseSqList(SqList &l) {
-    ElemType tmp;
-    for (int i = 0; i < l.length / 2; ++i) {
-        tmp = l.data[i];
-        l.data[i] = l.data[l.length - 1 - i];
-        l.data[l.length - 1 - i] = tmp;
+void DeleteByValue(SqList &l, int value) {
+    int j = l.length - 1;
+    for (int i = 0; i < l.length; ++i) {
+        if (l.data[i] == value) {
+            l.data[i] = l.data[j];
+            l.length--;
+            j = l.length - 1;
+        }
     }
 }
 

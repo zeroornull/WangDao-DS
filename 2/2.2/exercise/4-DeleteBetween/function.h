@@ -1,6 +1,12 @@
-#include <stdio.h>
+//
+// Created by xxp on 2023/3/6.
+//
+
+#ifndef INC_4_DELETEBETWEEN_FUNCTION_H
+#define INC_4_DELETEBETWEEN_FUNCTION_H
 
 //顺序表插入与排序
+#include <stdio.h>
 #define MaxSize 50
 typedef int ElemType;
 //静态分配
@@ -11,32 +17,23 @@ typedef struct {
 
 bool ListInsert(SqList &L, int pos, ElemType element);
 void PrintList(SqList l);
-void ReverseSqList(SqList &l);
 
-int main() {
+SqList InitSqList() {
     SqList L;
     L.data[0] = 1;
     L.data[1] = 2;
     L.data[2] = 3;
-    L.length = 3;
-    bool ret = ListInsert(L, 3, 60);
-    if (ret) {
-        printf("insert sqlist success\n");
-        PrintList(L);
-    } else {
-        printf("insert sqlist fail\n");
-    }
-    ReverseSqList(L);
-    PrintList(L);
-    return 0;
-}
-void ReverseSqList(SqList &l) {
-    ElemType tmp;
-    for (int i = 0; i < l.length / 2; ++i) {
-        tmp = l.data[i];
-        l.data[i] = l.data[l.length - 1 - i];
-        l.data[l.length - 1 - i] = tmp;
-    }
+    L.data[3] = 4;
+    L.data[4] = 5;
+    L.length = 5;
+//    bool ret = ListInsert(L, 3, 60);
+//    if (ret) {
+//        printf("insert sqlist success\n");
+//        PrintList(L);
+//    } else {
+//        printf("insert sqlist fail\n");
+//    }
+    return L;
 }
 
 void PrintList(SqList l) {
@@ -65,3 +62,5 @@ bool ListInsert(SqList &L, int pos, ElemType element) {
     L.length++;
     return true;
 }
+
+#endif//INC_4_DELETEBETWEEN_FUNCTION_H
