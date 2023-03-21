@@ -6,7 +6,7 @@ LinkList arrayToList(vector<int> arr, int n);
 LinkList Search_1st_Common(LinkList L1, LinkList L2);
 int Length(LinkList L);
 /**
- * 暂时没想到怎么复现 公共节点
+ * 暂时没想到怎么复现公共节点
  * @return
  */
 int main() {
