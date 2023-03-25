@@ -5,8 +5,8 @@
 #ifndef INC_1_DELETEELEM_FUNCTION_H
 #define INC_1_DELETEELEM_FUNCTION_H
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <vector>
 using namespace std;
 // data struct
