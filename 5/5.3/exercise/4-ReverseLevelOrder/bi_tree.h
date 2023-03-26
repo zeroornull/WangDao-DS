@@ -1,5 +1,12 @@
+//
+// Created by xxp on 2023/3/25.
+//
+
+#ifndef INC_4_REVERSELEVELORDER_BI_TREE_H
+#define INC_4_REVERSELEVELORDER_BI_TREE_H
+
 #include <iostream>
-#include <stack>
+#include <queue>
 #include <vector>
 using namespace std;
 
@@ -12,41 +19,27 @@ typedef struct BiTNode {
 
 BiTree sortedArrayToBST(vector<int> &nums);
 BiTree buildTree(vector<int> &nums, int left, int right);
-
+void inorderTraversal(BiTree root);
+void preorderTraversal(BiTree root);
 void postorderTraversal(BiTree root);
+void levelOrder(BiTree root);
 
-
-void postOrderNoRecur(BiTree root);
-int main() {
-    vector<int> array = {1, 2, 3, 4, 5, 6};
-    BiTree root = sortedArrayToBST(array);
-    postorderTraversal(root);
-    cout << endl;
-    postOrderNoRecur(root);
-    return 0;
-}
-void postOrderNoRecur(BiTree root) {
-    stack<BiTree> s;
-    BiTree p = root, r = nullptr;
-    while (p || !s.empty()) {
-        if (p) {
-            s.push(p);
-            p = p->lchild;
-        } else {
-            p = s.top();
-            if (p->rchild && p->rchild != r) {
-                p = p->rchild;
-            } else {
-                p = s.top();
-                cout << p->data << " ";
-                s.pop();
-                r = p;
-                p = nullptr;
-            }
+void levelOrder(BiTree root) {
+    queue<BiTree> q;
+    BiTree p;
+    q.push(root);
+    while (!q.empty()) {
+        p = q.front();
+        cout << p->data << " ";
+        q.pop();
+        if (p->lchild != nullptr) {
+            q.push(p->lchild);
+        }
+        if (p->rchild != nullptr) {
+            q.push(p->rchild);
         }
     }
 }
-
 BiTree sortedArrayToBST(vector<int> &nums) {
     return buildTree(nums, 0, nums.size() - 1);
 }
@@ -60,7 +53,22 @@ BiTree buildTree(vector<int> &nums, int left, int right) {
     root->rchild = buildTree(nums, mid + 1, right);
     return root;
 }
-
+void inorderTraversal(BiTree root) {
+    if (root == nullptr) {
+        return;
+    }
+    inorderTraversal(root->lchild);
+    cout << root->data << " ";
+    inorderTraversal(root->rchild);
+}
+void preorderTraversal(BiTree root) {
+    if (root == nullptr) {
+        return;
+    }
+    cout << root->data << " ";
+    preorderTraversal(root->lchild);
+    preorderTraversal(root->rchild);
+}
 void postorderTraversal(BiTree root) {
     if (root == nullptr) {
         return;
@@ -69,3 +77,4 @@ void postorderTraversal(BiTree root) {
     postorderTraversal(root->rchild);
     cout << root->data << " ";
 }
+#endif//INC_4_REVERSELEVELORDER_BI_TREE_H
